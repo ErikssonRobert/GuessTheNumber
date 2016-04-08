@@ -79,53 +79,64 @@ public class MediumActivity extends AppCompatActivity {
     }
 
     public void ButtonOnClick12(View XII){
-        guess = Integer.parseInt(guessing);
+        usedGuesses++;
 
-        if (guesses > 0) {
-            if (guess == rando) {
-                guesses = 0;
-                TextView guessesField = (TextView) findViewById(R.id.guessesField);
-                guessesField.setText("" + guesses);
-                TextView resultField = (TextView) findViewById(R.id.resultField);
-                resultField.setText("Congratulations!");
-                guessing = "";
-                TextView guessField = (TextView)findViewById(R.id.guessField);
-                guessField.setText(guessing);
-            } else if (guess < rando) {
-                guesses--;
-                TextView guessesField = (TextView) findViewById(R.id.guessesField);
-                guessesField.setText("" + guesses);
-                TextView resultField = (TextView) findViewById(R.id.resultField);
-                resultField.setText("The answer is higher!");
-                guessing = "";
-                TextView guessField = (TextView)findViewById(R.id.guessField);
-                guessField.setText(guessing);
-            } else if (guess > rando) {
-                guesses--;
-                TextView guessesField = (TextView) findViewById(R.id.guessesField);
-                guessesField.setText("" + guesses);
-                TextView resultField = (TextView) findViewById(R.id.resultField);
-                resultField.setText("The answer is lower!");
-                guessing = "";
-                TextView guessField = (TextView)findViewById(R.id.guessField);
-                guessField.setText(guessing);
-            }
-
-            if (guesses == 0 && guess != rando) {
-                TextView resultField = (TextView) findViewById(R.id.resultField);
-                resultField.setText("Sorry, the answer was: " + rando);
-                guessing = "";
-                TextView guessField = (TextView)findViewById(R.id.guessField);
-                guessField.setText(guessing);
-            }
-        }
-        else
+        if (guessing.equals(""))
             return;
+        else {
+            guess = Integer.parseInt(guessing);
+            TextView prevGuess = (TextView) findViewById(R.id.prevGuessField);
+            prevGuess.setText("" + guess);
+
+            if (guesses > 0) {
+                if (guess == rando) {
+                    guesses = 0;
+                    TextView guessesField = (TextView) findViewById(R.id.guessesField);
+                    guessesField.setText("" + guesses);
+                    TextView resultField = (TextView) findViewById(R.id.resultField);
+                    resultField.setText("Congratulations! \n Guesses used: " + usedGuesses);
+                    guessing = "";
+                    TextView guessField = (TextView) findViewById(R.id.guessField);
+                    guessField.setText(guessing);
+                } else if (guess < rando) {
+                    guesses--;
+                    TextView guessesField = (TextView) findViewById(R.id.guessesField);
+                    guessesField.setText("" + guesses);
+                    TextView resultField = (TextView) findViewById(R.id.resultField);
+                    resultField.setText("The answer is higher!");
+                    guessing = "";
+                    TextView guessField = (TextView) findViewById(R.id.guessField);
+                    guessField.setText(guessing);
+                } else if (guess > rando) {
+                    guesses--;
+                    TextView guessesField = (TextView) findViewById(R.id.guessesField);
+                    guessesField.setText("" + guesses);
+                    TextView resultField = (TextView) findViewById(R.id.resultField);
+                    resultField.setText("The answer is lower!");
+                    guessing = "";
+                    TextView guessField = (TextView) findViewById(R.id.guessField);
+                    guessField.setText(guessing);
+                }
+
+                if (guesses == 0 && guess != rando) {
+                    TextView resultField = (TextView) findViewById(R.id.resultField);
+                    resultField.setText("Sorry, the answer was: " + rando + "\nGuesses used: " + usedGuesses);
+                    guessing = "";
+                    TextView guessField = (TextView) findViewById(R.id.guessField);
+                    guessField.setText(guessing);
+                }
+            } else
+                return;
+        }
     }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_medium);
+        setContentView(R.layout.activity_second);
+
+        TextView guessesField = (TextView)findViewById(R.id.guessesField);
+        guessesField.setText("" + guesses);
     }
 }
